@@ -1,0 +1,63 @@
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.19;
+
+import {Test, console} from "lib/forge-std/src/Test.sol";
+import {LAT} from "../../src/LAT.sol";
+import {Engine} from "../../src/Engine.sol";
+import {HelperConfig} from "../../script/HelperConfig.s.sol";
+import {DeployLAT} from "../../script/DeployLAT.s.sol";
+import {ERC20Mock} from "lib/openzeppelin-contracts/contracts/mocks/token/ERC20Mock.sol";
+
+contract TestEngine is Test {
+    address wethAddress = 0xf531B8F309Be94191af87605CfBf600D71C2cFe0;
+    address wbtcAddress = 0xE6D22d565C860Bbeb2B411dFce91dD4B8F318594;
+    address ethPriceFeed = 0x694AA1769357215DE4FAC081bf1f309aDC325306;
+    address btcPriceFeed = 0x1b44F3514812d835EB1BDB0acB33d3fA3351Ee43;
+
+    address[] collateralTokens;
+    address[] priceFeeds;
+    address latAddress = 0x1b44F3514812d835EB1BDB0acB33d3fA3351Ee43;
+
+    // function testEngine() public {
+    //     collateralTokens.push(wethAddress);
+    //     collateralTokens.push(wbtcAddress);
+    //     priceFeeds.push(ethPriceFeed);
+    //     priceFeeds.push(btcPriceFeed);
+
+    //     Engine engine = new Engine(collateralTokens, priceFeeds, lat);
+
+    //     uint256 number = 10;
+    //     uint256 newNumber = engine.bigNumber();
+
+    //     assertEq(number, newNumber);
+    // }
+
+    // function testHelperConfig() public {
+    //     HelperConfig newHelper = new HelperConfig();
+    //     (
+    //         address weth,
+    //         address wbtc,
+    //         address ethPrice,
+    //         address btcPrice
+    //     ) = newHelper.networkConfig();
+
+    //     console.log(weth);
+    //     console.log(wbtc);
+    //     console.log(ethPrice);
+    //     console.log(btcPrice);
+
+    //     assert(weth != address(0));
+    // }
+
+    function testDeploy() public {
+        DeployLAT deployLat = new DeployLAT();
+        (LAT lat, Engine engine, HelperConfig helperConfig) = deployLat.run();
+
+        uint256 latNumber = lat.latNumber();
+        uint256 bigNumber = engine.bigNumber();
+
+        assertEq(latNumber, 5);
+        assertEq(bigNumber, 10);
+    }
+}

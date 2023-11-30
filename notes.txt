@@ -1,0 +1,46 @@
+// need this information before you can check a user's health factor
+
+_getAccountInformation 
+
+getAccountCollateralValue
+
+_getUsdValue
+
+// check healt factor functions
+
+revertifhealthfctorbroken 
+
+_healthFactor
+
+_calculateHealthFactor
+
+
+
+// functions needed for liquidate function to work
+    - _healthFactor
+    1. getTokenAmountFromUsd 
+    2. _redeemCollateral
+    3. _burnDsc
+
+///////////////////////////////////////////
+///////   FUNCTIONS TO COMPLETE  /////////
+/////////////////////////////////////////
+    1. depositAndMintLAT()
+
+    2. redeemCollteral()
+
+    3. redeemCollateralForLAT()
+        - 1. burn LAT
+        - 2. redeem 
+        - 3. this function burns LAT and then allows the user to redeem their 
+            specific ERC20 token collateral in one transction
+    4. burnLAT()
+
+
+    5. getter functions 
+        - getUserCollateral
+        - getuserAccountInformation
+        - getCollateralTokens
+        - getCollateralTokenPriceFeed
+    
+    
